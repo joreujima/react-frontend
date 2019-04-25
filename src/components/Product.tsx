@@ -21,7 +21,7 @@ export class Product extends Component<ProductProps> {
       <Col span={6}>
         <Card
           hoverable
-          style={{ width: "200px" }}
+          style={{ width: "200px", marginBottom: "20px" }}
           onClick={() => {
             this.props.onPress();
           }}

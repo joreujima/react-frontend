@@ -20,11 +20,15 @@ class Cart extends Component<CartComponentPropTypes> {
       return item.price * item.amount + total;
     }, 0);
 
+    return this.convertToCurrency(total);
+  };
+
+  convertToCurrency = (amount: number) => {
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR",
       minimumFractionDigits: 0
-    }).format(total);
+    }).format(amount);
   };
 
   render() {
@@ -32,10 +36,23 @@ class Cart extends Component<CartComponentPropTypes> {
       <Card
         title="Selected Products"
         style={{ width: 300 }}
-        extra={`${this.props.cart.products.length} Items`}
+        extra={`${this.props.cart.products.reduce(
+          (total, item: any) => total + item.amount,
+          0
+        )} Items`}
       >
         {this.props.cart.products.map((item: any) => (
-          <li>{item.name}</li>
+          <li
+            style={{
+              display: "flex",
+              justifyContent: "space-between"
+            }}
+          >
+            <span>{item.name}</span>
+            <span>
+              {this.convertToCurrency(item.price)}&times;{item.amount}
+            </span>
+          </li>
         ))}
         <hr />
         <Row
