@@ -64,7 +64,7 @@ class Cart extends Component<CartComponentPropTypes> {
       this.props.clearAllProducts();
 
       message.success("Purchase Successfully Made!", 2500);
-    }, 2500);
+    });
   };
 
   render() {
