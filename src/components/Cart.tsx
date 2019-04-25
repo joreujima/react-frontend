@@ -25,6 +25,16 @@ export class Cart extends Component {
           </Col>
         </Row>
         <Button
+          type="primary"
+          block
+          style={{
+            marginTop: "10px"
+          }}
+          size="large"
+        >
+          Confirm Purchase
+        </Button>
+        <Button
           type="danger"
           block
           style={{

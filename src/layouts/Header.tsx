@@ -30,7 +30,7 @@ export const Header = () => (
       style={{ lineHeight: "64px" }}
     >
       <Menu.Item key="1">POS</Menu.Item>
-      <Menu.Item key="2">Profile</Menu.Item>
+      <Menu.Item key="2">Settings</Menu.Item>
       <Menu.Item key="3" disabled>
         Current Balance: <b>Rp 250.000.000</b>
       </Menu.Item>
