@@ -9,19 +9,19 @@ export interface CartType {
   products: Array<CartProductItem>;
 }
 
-type ActionType = {
+export type ActionType = {
   type: string;
   payload?: any;
 };
 
-type CartProductItem = {
+export type CartProductItem = {
   id: number;
   name: string;
   price: number;
   amount: number;
 };
 
-type CartAddProductType = {
+export type CartAddProductType = {
   id: number;
   name: string;
   price: number;

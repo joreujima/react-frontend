@@ -1,7 +1,7 @@
 /* Import Ant Design CSS */
 @import "~antd/dist/antd.css";
 /* Import Nunito Sans Font from External Sources */
-@import "https://fonts.googleapis.com/css?family=Nunito+Sans";
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,700");
 
 body {
   margin: 0;

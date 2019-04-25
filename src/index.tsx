@@ -1,8 +1,9 @@
+import "react-hot-loader";
 import React from "react";
 import ReactDOM from "react-dom";
 
 import * as serviceWorker from "./serviceWorker";
-import { Routes } from "./routes";
+import Routes from "./routes";
 
 import "./index.css";
 

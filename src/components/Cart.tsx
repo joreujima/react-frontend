@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Card, Row, Col, Button, Modal, message } from "antd";
+import { Card, Row, Col, Button, Modal, message, Table } from "antd";
 import { connect } from "react-redux";
 import styled from "@emotion/styled";
 import { CartType, clearAllProducts } from "../modules/CartModule";
+import TransactionDetailModal from "./TransactionDetailModal";
 
 const BigNumberTextStyled = styled.div`
   font-size: 24px;
@@ -17,7 +18,8 @@ interface CartComponentPropTypes {
 
 class Cart extends Component<CartComponentPropTypes> {
   state = {
-    isLoading: false
+    isLoading: false,
+    visible: false
   };
 
   countTotalPrice = () => {
@@ -58,13 +60,10 @@ class Cart extends Component<CartComponentPropTypes> {
 
     setTimeout(() => {
       this.setState({
-        isLoading: false
+        isLoading: false,
+        visible: true
       });
-
-      this.props.clearAllProducts();
-
-      message.success("Purchase Successfully Made!", 2500);
-    });
+    }, 1000);
   };
 
   render() {
@@ -133,6 +132,11 @@ class Cart extends Component<CartComponentPropTypes> {
             Clear Items
           </Button>
         )}
+
+        <TransactionDetailModal
+          visible={this.state.visible}
+          products={this.props.cart.products}
+        />
       </Card>
     );
   }
