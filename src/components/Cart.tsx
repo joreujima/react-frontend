@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Card, Row, Col, Button } from "antd";
+import { Card, Row, Col, Button, Modal, message } from "antd";
 import { connect } from "react-redux";
 import styled from "@emotion/styled";
-import { CartType } from "../modules/CartModule";
+import { CartType, clearAllProducts } from "../modules/CartModule";
 
 const BigNumberTextStyled = styled.div`
   font-size: 24px;
@@ -12,9 +12,14 @@ const BigNumberTextStyled = styled.div`
 
 interface CartComponentPropTypes {
   cart: CartType;
+  clearAllProducts: Function;
 }
 
 class Cart extends Component<CartComponentPropTypes> {
+  state = {
+    isLoading: false
+  };
+
   countTotalPrice = () => {
     const total = this.props.cart.products.reduce((total, item: any) => {
       return item.price * item.amount + total;
@@ -31,6 +36,37 @@ class Cart extends Component<CartComponentPropTypes> {
     }).format(amount);
   };
 
+  handleClearAllProducts = () => {
+    Modal.confirm({
+      title: "Are you sure you want to clear all the products?",
+
+      okText: "Yes",
+      okType: "danger",
+
+      cancelText: "No",
+      onOk: () => {
+        this.props.clearAllProducts();
+      },
+      onCancel() {}
+    });
+  };
+
+  handleConfirmPurchase = () => {
+    this.setState({
+      isLoading: true
+    });
+
+    setTimeout(() => {
+      this.setState({
+        isLoading: false
+      });
+
+      this.props.clearAllProducts();
+
+      message.success("Purchase Successfully Made!", 2500);
+    }, 2500);
+  };
+
   render() {
     return (
       <Card
@@ -41,8 +77,9 @@ class Cart extends Component<CartComponentPropTypes> {
           0
         )} Items`}
       >
-        {this.props.cart.products.map((item: any) => (
+        {this.props.cart.products.map((item: any, index: number) => (
           <li
+            key={index}
             style={{
               display: "flex",
               justifyContent: "space-between"
@@ -54,6 +91,7 @@ class Cart extends Component<CartComponentPropTypes> {
             </span>
           </li>
         ))}
+
         <hr />
         <Row
           style={{
@@ -67,26 +105,34 @@ class Cart extends Component<CartComponentPropTypes> {
             <BigNumberTextStyled>{this.countTotalPrice()}</BigNumberTextStyled>
           </Col>
         </Row>
-        <Button
-          type="primary"
-          block
-          style={{
-            marginTop: "10px"
-          }}
-          size="large"
-        >
-          Confirm Purchase
-        </Button>
-        <Button
-          type="danger"
-          block
-          style={{
-            marginTop: "10px"
-          }}
-          size="large"
-        >
-          Clear Items
-        </Button>
+        {this.props.cart.products.length > 0 && (
+          <Button
+            type="primary"
+            block
+            style={{
+              marginTop: "10px"
+            }}
+            size="large"
+            loading={this.state.isLoading}
+            onClick={() => this.handleConfirmPurchase()}
+          >
+            Confirm Purchase
+          </Button>
+        )}
+        {this.props.cart.products.length > 0 && (
+          <Button
+            type="danger"
+            block
+            style={{
+              marginTop: "10px"
+            }}
+            size="large"
+            disabled={this.state.isLoading}
+            onClick={() => this.handleClearAllProducts()}
+          >
+            Clear Items
+          </Button>
+        )}
       </Card>
     );
   }
@@ -96,4 +142,9 @@ const mapStateToProps = (state: any) => {
   return { cart: state.cart };
 };
 
-export default connect(mapStateToProps)(Cart);
+const mapActionToProps = { clearAllProducts };
+
+export default connect(
+  mapStateToProps,
+  mapActionToProps
+)(Cart);

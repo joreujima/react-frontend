@@ -1,6 +1,5 @@
-import { Dispatch } from "redux";
-
 const ADD_PRODUCT = "@cart/ADD_PRODUCT";
+const CLEAR_ALL_PRODUCT = "@cart/CLEAR_ALL_PRODUCT";
 
 const initialState: CartType = {
   products: []
@@ -55,6 +54,11 @@ export default function(state = initialState, action: ActionType) {
         ...state,
         products: onAddProduct(state, action.payload)
       };
+    case CLEAR_ALL_PRODUCT:
+      return {
+        ...state,
+        products: []
+      };
     default:
       return state;
   }
@@ -63,4 +67,8 @@ export default function(state = initialState, action: ActionType) {
 export const addProductToCart = (payload: CartAddProductType) => ({
   type: ADD_PRODUCT,
   payload
+});
+
+export const clearAllProducts = () => ({
+  type: CLEAR_ALL_PRODUCT
 });
