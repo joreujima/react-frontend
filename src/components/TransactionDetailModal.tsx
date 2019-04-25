@@ -6,6 +6,7 @@ import { PaymentOption } from "./PaymentOption";
 type TransactionDetailModalPropsType = {
   visible: boolean;
   products: Array<CartProductItem>;
+  onClose: Function;
 };
 export default class TransactionDetailModal extends Component<
   TransactionDetailModalPropsType
@@ -32,7 +33,9 @@ export default class TransactionDetailModal extends Component<
         visible={this.props.visible}
         width={720}
         okText="Print"
-        // onOk={this.handleOk}
+        onOk={() => this.props.onClose()}
+        onCancel={() => this.props.onClose()}
+
         // onCancel={this.handleCancel}
       >
         <Table

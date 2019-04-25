@@ -136,6 +136,11 @@ class Cart extends Component<CartComponentPropTypes> {
         <TransactionDetailModal
           visible={this.state.visible}
           products={this.props.cart.products}
+          onClose={() => {
+            this.setState({
+              visible: false
+            });
+          }}
         />
       </Card>
     );
