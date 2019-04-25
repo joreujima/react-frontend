@@ -1,0 +1,9 @@
+/* Import Ant Design CSS */
+@import "~antd/dist/antd.css";
+/* Import Nunito Sans Font from External Sources */
+@import "https://fonts.googleapis.com/css?family=Nunito+Sans";
+
+body {
+  margin: 0;
+  font-family: "Nunito Sans", Verdana, Geneva, Tahoma, sans-serif;
+}
