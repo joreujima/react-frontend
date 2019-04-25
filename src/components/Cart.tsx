@@ -1,16 +1,42 @@
 import React, { Component } from "react";
 import { Card, Row, Col, Button } from "antd";
+import { connect } from "react-redux";
 import styled from "@emotion/styled";
+import { CartType } from "../modules/CartModule";
 
 const BigNumberTextStyled = styled.div`
   font-size: 24px;
   font-weight: bold;
   text-align: right;
 `;
-export class Cart extends Component {
+
+interface CartComponentPropTypes {
+  cart: CartType;
+}
+
+class Cart extends Component<CartComponentPropTypes> {
+  countTotalPrice = () => {
+    const total = this.props.cart.products.reduce((total, item: any) => {
+      return item.price * item.amount + total;
+    }, 0);
+
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0
+    }).format(total);
+  };
+
   render() {
     return (
-      <Card title="Selected Products" style={{ width: 300 }} extra={"0 Items"}>
+      <Card
+        title="Selected Products"
+        style={{ width: 300 }}
+        extra={`${this.props.cart.products.length} Items`}
+      >
+        {this.props.cart.products.map((item: any) => (
+          <li>{item.name}</li>
+        ))}
         <hr />
         <Row
           style={{
@@ -21,7 +47,7 @@ export class Cart extends Component {
         >
           <Col span={10}>Total</Col>
           <Col span={14}>
-            <BigNumberTextStyled>Rp 0</BigNumberTextStyled>
+            <BigNumberTextStyled>{this.countTotalPrice()}</BigNumberTextStyled>
           </Col>
         </Row>
         <Button
@@ -48,3 +74,9 @@ export class Cart extends Component {
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return { cart: state.cart };
+};
+
+export default connect(mapStateToProps)(Cart);

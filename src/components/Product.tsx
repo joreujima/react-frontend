@@ -5,6 +5,7 @@ type ProductProps = {
   name: string;
   price: number;
   image: string;
+  onPress: Function;
 };
 
 export class Product extends Component<ProductProps> {
@@ -21,6 +22,9 @@ export class Product extends Component<ProductProps> {
         <Card
           hoverable
           style={{ width: "200px" }}
+          onClick={() => {
+            this.props.onPress();
+          }}
           cover={
             <div
               style={{

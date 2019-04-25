@@ -1,11 +1,18 @@
-import React, { Component } from "react";
-import { Row, Col, Card } from "antd";
+import React, { Component, Dispatch } from "react";
+import { Row, Col } from "antd";
+import { connect } from "react-redux";
 
 import { Layout } from "../layouts/Layout";
-import { Cart } from "../components/Cart";
+import Cart from "../components/Cart";
 import { Product } from "../components/Product";
+import { addProductToCart, CartType } from "../modules/CartModule";
 
-export class Home extends Component {
+type HomePropTypes = {
+  addProductToCart: Function;
+  cart: CartType;
+};
+
+class Home extends Component<HomePropTypes> {
   state = {
     products: [
       {
@@ -32,10 +39,13 @@ export class Home extends Component {
     ]
   };
 
+  handleAddToCart = (item: any) => {
+    this.props.addProductToCart(item);
+  };
+
   render() {
     return (
       <Layout>
-        {/* <h1>Hello</h1> */}
         <Row>
           <Col span={18}>
             {this.state.products.map(product => (
@@ -44,6 +54,7 @@ export class Home extends Component {
                 image={product.image}
                 price={product.price}
                 name={product.name}
+                onPress={() => this.handleAddToCart(product)}
               />
             ))}
           </Col>
@@ -55,3 +66,14 @@ export class Home extends Component {
     );
   }
 }
+
+const mapStateToProps = (state: any) => ({
+  cart: state.cart
+});
+
+const mapDispatch = { addProductToCart };
+
+export default connect(
+  mapStateToProps,
+  mapDispatch
+)(Home);
