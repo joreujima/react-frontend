@@ -1,8 +1,10 @@
 {
-  "name": "project-react-app-state",
+  "name": "react-frontend-pos",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "10.0.10",
+    "@emotion/styled": "10.0.10",
     "@types/jest": "24.0.11",
     "@types/node": "11.13.7",
     "@types/react": "16.8.14",

@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import styled from "@emotion/styled";
+import { Center } from "./components/Center";
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const StyledInput = styled.input`
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 24px;
+`;
+
+export class App extends Component {
+  render() {
+    return (
+      <Center>
+        <div style={{ height: "100vh" }}>
+          <StyledInput placeholder="Add your todos" />
+        </div>
+      </Center>
+    );
+  }
 }
-
-export default App;
