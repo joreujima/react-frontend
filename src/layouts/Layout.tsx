@@ -12,7 +12,8 @@ export class Layout extends Component {
         <Content
           style={{
             padding: "20px 50px",
-            height: "100vh"
+            minHeight: "100vh",
+            height: "100%"
           }}
         >
           {this.props.children}

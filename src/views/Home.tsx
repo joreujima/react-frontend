@@ -21,7 +21,7 @@ class Home extends Component<HomePropTypes> {
 
   render() {
     return (
-      <Layout>
+      <div>
         <Row>
           <Col span={18}>
             {ProductJson.map(product => (
@@ -38,7 +38,7 @@ class Home extends Component<HomePropTypes> {
             <Cart />
           </Col>
         </Row>
-      </Layout>
+      </div>
     );
   }
 }

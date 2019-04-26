@@ -5,10 +5,15 @@ import { Provider } from "react-redux";
 import { store } from "../store";
 
 import { hot } from "react-hot-loader/root";
+import Setting from "../views/Setting";
+import { Layout } from "../layouts/Layout";
 const Routes = () => (
   <Provider store={store}>
     <BrowserRouter>
-      <Route path="/" component={Home} />
+      <Layout>
+        <Route path="/" exact component={Home} />
+        <Route path="/setting" exact component={Setting} />
+      </Layout>
     </BrowserRouter>
   </Provider>
 );

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
 import { Layout as AntdLayout, Menu } from "antd";
 import styled from "@emotion/styled";
 
@@ -14,7 +15,7 @@ const LogoStyled = styled.div`
   /* justify-content:  */
 `;
 
-export const Header = () => (
+export const Header = withRouter(props => (
   <AntdHeader
     style={{
       display: "flex",
@@ -27,13 +28,18 @@ export const Header = () => (
       theme="dark"
       mode="horizontal"
       defaultSelectedKeys={["1"]}
+      selectedKeys={[props.location.pathname]}
       style={{ lineHeight: "64px" }}
     >
-      <Menu.Item key="1">POS</Menu.Item>
-      <Menu.Item key="2">Settings</Menu.Item>
+      <Menu.Item key="/">
+        <Link to="/">POS</Link>
+      </Menu.Item>
+      <Menu.Item key="/setting">
+        <Link to="/setting">Settings</Link>
+      </Menu.Item>
       <Menu.Item key="3" disabled>
         Current Balance: <b>Rp 250.000.000</b>
       </Menu.Item>
     </Menu>
   </AntdHeader>
-);
+));
