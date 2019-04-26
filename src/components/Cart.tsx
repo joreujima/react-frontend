@@ -42,7 +42,7 @@ class Cart extends Component<CartComponentPropTypes> {
     Modal.confirm({
       title: "Are you sure you want to clear all the products?",
 
-      okText: "Yes",
+      okText: "Confirm",
       okType: "danger",
 
       cancelText: "No",
@@ -63,7 +63,7 @@ class Cart extends Component<CartComponentPropTypes> {
         isLoading: false,
         visible: true
       });
-    }, 1000);
+    }, 250);
   };
 
   render() {
@@ -137,6 +137,12 @@ class Cart extends Component<CartComponentPropTypes> {
           visible={this.state.visible}
           products={this.props.cart.products}
           onClose={() => {
+            this.setState({
+              visible: false
+            });
+          }}
+          onConfirm={() => {
+            this.props.clearAllProducts();
             this.setState({
               visible: false
             });

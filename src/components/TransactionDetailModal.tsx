@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Table, Button } from "antd";
+import { Modal, Table, message } from "antd";
 import { CartProductItem } from "../modules/CartModule";
 import { PaymentOption } from "./PaymentOption";
 
@@ -7,10 +7,14 @@ type TransactionDetailModalPropsType = {
   visible: boolean;
   products: Array<CartProductItem>;
   onClose: Function;
+  onConfirm: Function;
 };
 export default class TransactionDetailModal extends Component<
   TransactionDetailModalPropsType
 > {
+  state = {
+    isLoading: false
+  };
   countTotalPrice = () => {
     const total = this.props.products.reduce((total, item: any) => {
       return item.price * item.amount + total;
@@ -32,8 +36,23 @@ export default class TransactionDetailModal extends Component<
         title="Transaction"
         visible={this.props.visible}
         width={720}
-        okText="Print"
-        onOk={() => this.props.onClose()}
+        okText="Confirm"
+        confirmLoading={this.state.isLoading}
+        onOk={() => {
+          this.setState({
+            isLoading: true
+          });
+
+          setTimeout(() => {
+            message.success("Transaction Successfully Made", 2.5);
+
+            this.setState({
+              isLoading: false
+            });
+
+            this.props.onConfirm();
+          }, 1000);
+        }}
         onCancel={() => this.props.onClose()}
 
         // onCancel={this.handleCancel}
