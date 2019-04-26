@@ -5,17 +5,6 @@ import { Layout } from "../layouts/Layout";
 
 class Setting extends Component {
   render() {
-    const formItemLayout = {
-      // labelCol: {
-      //   xs: { span: 24 },
-      //   sm: { span: 8 }
-      // },
-      // wrapperCol: {
-      //   xs: { span: 24 },
-      //   sm: { span: 16 }
-      // }
-    };
-
     return (
       <div>
         <h1>Setting</h1>
@@ -25,7 +14,8 @@ class Setting extends Component {
               style={{
                 background: "#fff",
                 padding: 24,
-                marginBottom: 16
+                marginBottom: 16,
+                marginRight: 10
               }}
             >
               <Row>
@@ -43,7 +33,7 @@ class Setting extends Component {
                 margin: 0
               }}
             >
-              <Form {...formItemLayout}>
+              <Form>
                 <legend>Cashier Setting</legend>
                 <Form.Item label="E-mail">
                   <Input placeholder="Input Your Email" />
@@ -52,6 +42,16 @@ class Setting extends Component {
                 <Button type="primary">Save</Button>
                 {/* </Form.Item> */}
               </Form>
+            </AntdLayout.Content>
+          </Col>
+          <Col span={12}>
+            <AntdLayout.Content
+              style={{
+                background: "#fff",
+                padding: 24
+              }}
+            >
+              <h1>Profile</h1>
             </AntdLayout.Content>
           </Col>
         </Row>
